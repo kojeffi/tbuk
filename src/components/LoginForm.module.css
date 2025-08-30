@@ -1,0 +1,567 @@
+/* LoginForm.module.css - Enhanced with mobile optimizations */
+.container {
+  display: flex;
+  min-height: 100vh;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+}
+
+/* Left Panel Styles */
+.welcomePanel {
+  flex: 1;
+  background: linear-gradient(135deg, #008080 0%, #006666 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.welcomePanel::before {
+  content: '';
+  position: absolute;
+  top: -50px;
+  right: -50px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.welcomePanel::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: -80px;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.welcomeContent {
+  max-width: 500px;
+  text-align: center;
+  z-index: 1;
+}
+
+.logoContainer {
+  margin-bottom: 2rem;
+}
+
+.welcomeTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.welcomeText {
+  font-size: 1.1rem;
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+  opacity: 0.9;
+}
+
+.buttonGroup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.learnMoreButton {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 0.75rem 2rem;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.learnMoreButton:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.appDownload {
+  margin-top: 1rem;
+}
+
+.downloadText {
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.storeButtons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.storeLink {
+  text-decoration: none;
+}
+
+.storeButton {
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+}
+
+.storeButton:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.storeIcon {
+  font-size: 1.8rem;
+  margin-right: 0.8rem;
+}
+
+.storeText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.getOn {
+  font-size: 0.7rem;
+  opacity: 0.9;
+}
+
+.storeName {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Right Panel Styles */
+.loginPanel {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f9fafb;
+  padding: 2rem;
+}
+
+.loginContainer {
+  width: 100%;
+  max-width: 400px;
+  padding: 2.5rem;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.loginContainer:hover {
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+}
+
+.loginHeaderContainer {
+  margin-bottom: 2rem;
+}
+
+.loginHeader {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #1a202c;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.loginSubheader {
+  color: #718096;
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 0.95rem;
+}
+
+/* Social Login */
+.socialLogin {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.socialButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 1px solid #e2e8f0;
+  background: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.socialButton:hover {
+  background: #f7fafc;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.socialIcon {
+  color: #718096;
+  font-size: 1.2rem;
+}
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  margin: 1.5rem 0;
+  color: #a0aec0;
+  font-size: 0.875rem;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background-color: #e2e8f0;
+}
+
+.divider span {
+  padding: 0 1rem;
+}
+
+/* Form Styles */
+.form {
+  margin-top: 1.5rem;
+}
+
+.inputContainer {
+  margin-bottom: 1.5rem;
+}
+
+.inputLabel {
+  display: block;
+  font-weight: 500;
+  color: #2d3748;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 1rem;
+  color: #a0aec0;
+  z-index: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 0.875rem 1rem 0.875rem 2.75rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+  color: #2d3748;
+}
+
+.input::placeholder {
+  color: #a0aec0;
+}
+
+.input:focus {
+  outline: none;
+  border-color: #008080;
+  box-shadow: 0 0 0 3px rgba(0, 128, 128, 0.1);
+}
+
+.inputError {
+  border-color: #e53e3e;
+}
+
+.inputError:focus {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.1);
+}
+
+.errorText {
+  color: #e53e3e;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+  display: block;
+}
+
+.eyeIcon {
+  position: absolute;
+  right: 1rem;
+  background: none;
+  border: none;
+  color: #a0aec0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.eyeIcon:hover {
+  color: #008080;
+}
+
+/* Options Container */
+.optionsContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.rememberMe {
+  display: flex;
+  align-items: center;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+.checkboxInner {
+  width: 18px;
+  height: 18px;
+  border: 1px solid #cbd5e0;
+  border-radius: 4px;
+  margin-right: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+}
+
+.checkboxChecked {
+  background-color: #008080;
+  border-color: #008080;
+}
+
+.checkIcon {
+  color: white;
+  font-size: 0.7rem;
+}
+
+.checkboxText {
+  font-size: 0.9rem;
+  color: #4a5568;
+}
+
+.forgotPassword {
+  background: none;
+  border: none;
+  color: #008080;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  padding: 0;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+  color: #006666;
+}
+
+/* Login Button */
+.loginButton {
+  width: 100%;
+  padding: 0.875rem;
+  background-color: #008080;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 128, 128, 0.2);
+}
+
+.loginButton:hover:not(:disabled) {
+  background-color: #006666;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 12px rgba(0, 128, 128, 0.25);
+}
+
+.loginButton:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.loginButton:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.loader {
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Sign Up */
+.signupContainer {
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.signupText {
+  color: #718096;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.signupLink {
+  color: #008080;
+  font-weight: 600;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+}
+
+.signupLink:hover {
+  text-decoration: underline;
+  color: #006666;
+}
+
+/* Mobile Optimizations */
+@media (max-width: 968px) {
+  .container {
+    flex-direction: column;
+  }
+  
+  .welcomePanel {
+    padding: 2rem 1rem;
+    min-height: 40vh;
+    border-radius: 0 0 24px 24px; /* Added bottom border radius */
+  }
+  
+  .welcomeTitle {
+    font-size: 2rem;
+  }
+  
+  .loginPanel {
+    padding: 2rem 1rem;
+  }
+  
+  .loginContainer {
+    padding: 2rem;
+    border-radius: 24px 24px 0 0; /* Added top border radius */
+    box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.08); /* Adjusted shadow for mobile */
+  }
+  
+  .storeButtons {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  /* Hide elements on mobile */
+  .welcomePanel::before,
+  .welcomePanel::after {
+    display: none;
+  }
+  
+  .appDownload {
+    display: none; /* Hide app download section on mobile */
+  }
+}
+
+@media (max-width: 640px) {
+  .loginContainer {
+    padding: 1.5rem;
+    border-radius: 20px 20px 0 0; /* Slightly smaller radius for very small screens */
+  }
+  
+  .welcomePanel {
+    border-radius: 0 0 20px 20px; /* Matching radius for welcome panel */
+  }
+  
+  .optionsContainer {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .forgotPassword {
+    align-self: flex-end;
+  }
+  
+  .storeButtons {
+    flex-direction: column;
+  }
+  
+  .welcomeTitle {
+    font-size: 1.8rem;
+  }
+  
+  .loginHeader {
+    font-size: 1.5rem;
+  }
+  
+  /* Hide social login on very small screens */
+  .socialLogin {
+    display: none;
+  }
+  
+  .divider {
+    display: none;
+  }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .learnMoreButton,
+  .storeButton,
+  .socialButton,
+  .input,
+  .checkboxInner,
+  .loginButton {
+    transition: none;
+  }
+}
