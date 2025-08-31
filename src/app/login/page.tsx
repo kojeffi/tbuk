@@ -10,15 +10,23 @@ import {
   FaEye, 
   FaEyeSlash, 
   FaCheck, 
-  FaGoogle, 
-  FaApple, 
-  FaMicrosoft, 
-  FaGooglePlay, 
-  FaApple as FaAppStore 
+  FaGooglePlay
 } from 'react-icons/fa';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from '@/components/LoginForm.module.css';
+
+// Define error state type
+interface FormErrors {
+  email?: string;
+  password?: string;
+}
+
+// Define the AuthContext type
+interface AuthContextType {
+  saveToken: (token: string) => Promise<void>;
+  // Add other properties from your AuthContext as needed
+}
 
 const LoginForm = () => {
   const [email, setEmail] = useState('');
@@ -26,13 +34,16 @@ const LoginForm = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({});
-  const { saveToken } = useContext(AuthContext);
+  const [errors, setErrors] = useState<FormErrors>({});
+  
+  // Get auth context with proper type assertion
+  const authContext = useContext(AuthContext) as AuthContextType;
+  
   const router = useRouter();
 
   // Validate form inputs
   const validateForm = useCallback(() => {
-    const newErrors = {};
+    const newErrors: FormErrors = {};
     
     if (!email.trim()) {
       newErrors.email = 'Email is required';
@@ -50,7 +61,7 @@ const LoginForm = () => {
     return Object.keys(newErrors).length === 0;
   }, [email, password]);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -70,7 +81,7 @@ const LoginForm = () => {
 
       if (response.data?.access_token) {
         const accessToken = response.data.access_token;
-        saveToken(accessToken);
+        authContext.saveToken(accessToken);
         toast.success('Login successful! Redirecting...');
         setTimeout(() => {
           router.push('/tbooke-learning');
@@ -78,7 +89,7 @@ const LoginForm = () => {
       } else {
         throw new Error('Invalid response from server');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Login error:', error);
       
       if (error.code === 'ECONNABORTED') {
@@ -167,31 +178,6 @@ const LoginForm = () => {
             <h2 className={styles.loginHeader}>Sign In to Your Account</h2>
             <p className={styles.loginSubheader}>Welcome back! Please enter your details</p>
           </div>
-          
-          {/* <div className={styles.socialLogin}>
-            <button 
-              className={styles.socialButton}
-              aria-label="Sign in with Google"
-            >
-              <FaGoogle className={styles.socialIcon} />
-            </button>
-            <button 
-              className={styles.socialButton}
-              aria-label="Sign in with Apple"
-            >
-              <FaApple className={styles.socialIcon} />
-            </button>
-            <button 
-              className={styles.socialButton}
-              aria-label="Sign in with Microsoft"
-            >
-              <FaMicrosoft className={styles.socialIcon} />
-            </button>
-          </div>
-          
-          <div className={styles.divider}>
-            <span>or continue with email</span>
-          </div> */}
 
           <form onSubmit={handleLogin} className={styles.form} noValidate>
             <div className={styles.inputContainer}>
