@@ -20,19 +20,32 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import styles from '@/components/LoginForm.module.css';
 
+// Define error state type
+interface FormErrors {
+  email?: string;
+  password?: string;
+}
+
 const LoginForm = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [errors, setErrors] = useState({});
-  const { saveToken } = useContext(AuthContext);
+  const [errors, setErrors] = useState<FormErrors>({});
+  
+  // Get auth context with proper type checking
+  const authContext = useContext(AuthContext);
+  if (!authContext) {
+    throw new Error('AuthContext must be used within an AuthProvider');
+  }
+  const { saveToken } = authContext;
+  
   const router = useRouter();
 
   // Validate form inputs
   const validateForm = useCallback(() => {
-    const newErrors = {};
+    const newErrors: FormErrors = {};
     
     if (!email.trim()) {
       newErrors.email = 'Email is required';
@@ -50,7 +63,7 @@ const LoginForm = () => {
     return Object.keys(newErrors).length === 0;
   }, [email, password]);
 
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (!validateForm()) {
@@ -78,7 +91,7 @@ const LoginForm = () => {
       } else {
         throw new Error('Invalid response from server');
       }
-    } catch (error) {
+    } catch (error: any) {
       console.error('Login error:', error);
       
       if (error.code === 'ECONNABORTED') {
