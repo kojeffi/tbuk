@@ -1,51 +1,16 @@
-// components/AuthContext.tsx
 'use client';
 
-import { createContext, useState, useEffect, useCallback, ReactNode } from 'react';
+import { createContext, useState, useEffect, useCallback } from 'react';
 import Cookies from 'js-cookie';
 import api from './api'; // same api instance you used in RN
 
-// Define interfaces for your data
-interface UserProfile {
-  profile_type?: string;
-  is_subscribed?: boolean;
-  // Add other user properties as needed
-}
+export const AuthContext = createContext();
 
-interface ProfileData {
-  user?: UserProfile;
-  notificationCount?: number;
-  // Add other profile properties as needed
-}
-
-interface AuthContextType {
-  authToken: string | null;
-  profileData: ProfileData | null;
-  loading: boolean;
-  error: string | null;
-  notificationCount: number;
-  isSubscribed: boolean;
-  isInstitution: boolean;
-  isAuthenticated: boolean;
-  saveToken: (token: string) => Promise<void>;
-  logout: () => void;
-  fetchProfileData: () => Promise<void>;
-  updateNotificationCount: (count: number) => void;
-  updateSubscriptionStatus: (status: boolean) => void;
-}
-
-// Create context with proper typing
-export const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-interface AuthProviderProps {
-  children: ReactNode;
-}
-
-export const AuthProvider = ({ children }: AuthProviderProps) => {
-  const [authToken, setAuthToken] = useState<string | null>(null);
-  const [profileData, setProfileData] = useState<ProfileData | null>(null);
+export const AuthProvider = ({ children }) => {
+  const [authToken, setAuthToken] = useState(null);
+  const [profileData, setProfileData] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(null);
   const [notificationCount, setNotificationCount] = useState(0);
   const [isInstitution, setIsInstitution] = useState(false);
   const [isSubscribed, setIsSubscribed] = useState(false);
@@ -66,7 +31,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
       setIsSubscribed(response.data.user?.is_subscribed || false);
       setNotificationCount(response.data.notificationCount || 0);
       setError(null);
-    } catch (e: any) {
+    } catch (e) {
       console.error('Failed to fetch profile data', e);
       setError('Failed to fetch profile data');
       if (e.response?.status === 401) {
@@ -87,12 +52,12 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   }, []);
 
   // Save token to cookies
-  const saveToken = async (token: string) => {
+  const saveToken = async (token) => {
     try {
       Cookies.set('authToken', token, { expires: 7 });
       setAuthToken(token);
       await fetchProfileData();
-    } catch (e: any) {
+    } catch (e) {
       console.error('Failed to save token', e);
       setError('Failed to save token');
     }
@@ -109,11 +74,11 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {
   };
 
   // Helpers
-  const updateNotificationCount = (count: number) => {
+  const updateNotificationCount = (count) => {
     setNotificationCount(count);
   };
 
-  const updateSubscriptionStatus = (status: boolean) => {
+  const updateSubscriptionStatus = (status) => {
     setIsSubscribed(status);
     if (profileData) {
       setProfileData({

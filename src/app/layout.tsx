@@ -1,5 +1,6 @@
+// src/app/layout.tsx
 import './globals.css';
-import { AuthProvider } from './AuthProvider'; // Make sure this import is correct
+import { AuthProvider } from '@/components/AuthContext'; // Correct import path
 
 export const metadata = {
   title: 'Tbooke - Education Platform',
